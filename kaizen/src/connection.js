@@ -35,12 +35,12 @@ var tkInfo = async()=>{
     })
     var opVal = await contract.methods.balanceOf('0x76a9f0344e863479fBec931AA4d887D05147cCca').call();
     opVal=web3.utils.toNumber(opVal);
-    opVal = (Number(opVal)/1e18)*EthPerToken*USD.USD;
+    opVal = (Number(opVal)/1e18)*EthPerToken;
     var totalFees = await contract.methods.totalFees().call();
     totalFees=web3.utils.toNumber(totalFees);
     totalFees = Number(totalFees)/1e18;
     totalFees*=(2/3);
-    var refVal = totalFees*EthPerToken*USD.USD;
+    var refVal = totalFees*EthPerToken;
     taxUpdate({
         op:opVal.toLocaleString(),
         ref:totalFees.toLocaleString(),
