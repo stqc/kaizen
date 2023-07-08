@@ -64,7 +64,7 @@ export const connect =async()=>{
     var connectedAccounts =await web3.eth.getAccounts();
     var accountBal = await contract.methods.balanceOf(connectedAccounts[0]).call();
     accountBal=web3.utils.toNumber(accountBal);
-    var val = (Number(accountBal)/1e18)*EthPerToken*USD.USD;
+    var val = (Number(accountBal)/1e18)*EthPerToken;
     var reflections = await contract.methods.reflectionFromToken(accountBal,true).call();
     reflections = web3.utils.toNumber(reflections);
     reflections=Number(reflections)/1e18;
