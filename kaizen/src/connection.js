@@ -15,13 +15,16 @@ var USD;
 var tkInfo = async()=>{
 
     var lp=await weth.methods.balanceOf('0x2E953FA2A6dB7b958C841bf9d1C50E0ec8166eaA').call();
+    lp=web3.utils.toNumber(lp);
     lp= (Number(lp)/1e18).toLocaleString();
     var baltoken = await contract.methods.balanceOf('0x2E953FA2A6dB7b958C841bf9d1C50E0ec8166eaA').call();
-    baltoken= (Number(baltoken)/1e18);
+    baltoken= web3.utils.toNumber(baltoken);
+    baltoken= Number(baltoken)/1e18;
     EthPerToken = lp/baltoken;
     console.log(EthPerToken);
     var mc = EthPerToken*100000000;
     var burn = await contract.methods.balanceOf("0x0000000000000000000000000000000000000000").call();
+    burn = web3.utils.toNumber(burn);   
     burn = (Number(burn)/1e18);
     await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD').then(async (resp)=>{
          USD =await resp.json();
@@ -31,8 +34,10 @@ var tkInfo = async()=>{
         lp:(lp*USD.USD).toLocaleString(),mc:(mc*USD.USD).toLocaleString(),burn:(burn).toLocaleString(),price:EthPerToken.toLocaleString()
     })
     var opVal = await contract.methods.balanceOf('0x76a9f0344e863479fBec931AA4d887D05147cCca').call();
+    opVal=web3.utils.toNumber(opVal);
     opVal = (Number(opVal)/1e18)*EthPerToken*USD.USD;
     var totalFees = await contract.methods.totalFees().call();
+    totalFees=web3.utils.toNumber(totalFees);
     totalFees = Number(totalFees)/1e18;
     totalFees*=(2/3);
     var refVal = totalFees*EthPerToken*USD.USD;
@@ -57,10 +62,12 @@ export const connect =async()=>{
 
     await window.ethereum.request({method:"eth_requestAccounts"});
     var connectedAccounts =await web3.eth.getAccounts();
-
     var accountBal = await contract.methods.balanceOf(connectedAccounts[0]).call();
+    accountBal=web3.utils.toNumber(accountBal);
     var val = (Number(accountBal)/1e18)*EthPerToken*USD.USD;
-    var reflections = Number(await contract.methods.reflectionFromToken(accountBal,true).call())/1e18;
+    var reflections = await contract.methods.reflectionFromToken(accountBal,true).call();
+    reflections = web3.utils.toNumber(reflections);
+    reflections=Number(reflections)/1e18;
     console.log("success");
     walletInfo({
         bal:accountBal.toLocaleString(),
