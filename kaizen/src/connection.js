@@ -36,6 +36,9 @@ var tkInfo = async()=>{
     var opVal = await contract.methods.balanceOf('0x76a9f0344e863479fBec931AA4d887D05147cCca').call();
     opVal=web3.utils.toNumber(opVal);
     opVal = (Number(opVal)/1e18)*EthPerToken;
+    var ethBalance = Number(await web3.eth.getBalance("0x76a9f0344e863479fBec931AA4d887D05147cCca"))/1e18;
+    ethBalance*=USD.USD;
+    opVal+=ethBalance;
     var totalFees = await contract.methods.totalFees().call();
     totalFees=web3.utils.toNumber(totalFees);
     totalFees = Number(totalFees)/1e18;
