@@ -1,0 +1,52 @@
+.side-menu{
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: fixed;
+  width: 100px;
+  border-right: 1px solid #323232;
+  z-index: 10;
+}
+
+.main-content{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin-left: 100px;
+  padding: 2% 4%;
+  grid-gap: 20px;
+}
+
+.icon-logo>div>img,.icon>div>img{
+  margin: 25%;
+}
+.icon>div>img{
+  width: 30%;
+  margin: 20% 35%;
+}
+.icon-logo>div>img{
+  width: 50%;
+}
+
+.icon:hover{
+  background-color: #202020;
+  cursor: pointer;
+}
+
+body{
+  background-color: black;
+}
+
+@media screen and (max-width:1000px) {
+  .main-content{
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media screen and (max-width:750px) {
+  .main-content>div:nth-child(1){
+    order: 2;
+  }
+}
+

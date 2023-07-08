@@ -1,0 +1,103 @@
+.info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+.info>div{
+    border: 2px solid ;
+    border-image: linear-gradient(45deg, #95342D, #E1544A,#95342D, #E1544A, #95342D) 1;
+    padding: 4%;
+    background-color: #17161D;
+}
+
+.info>div>table{
+    color: white;
+    padding: 4% 2%;
+    margin-top: 10%;
+    width: 100%;
+}
+tr{
+    margin: 14% 0%;
+}
+th{
+    text-align: left;
+}
+td{
+    text-align: right;
+    color: #747474;
+}
+
+.price-val{
+    font-size: 2rem;
+}
+.price-val>p{
+    background:linear-gradient(180deg,#A08440 10%,#E5D79B 40%,#F3E5A6 40%) ;
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900  ;
+}
+
+.temple{
+    display: flex;
+    flex-direction: row;
+    padding: 4%;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+p{
+    color: white;
+    font-weight: 800;
+}
+
+.p-val{
+    color: #747474;
+    font-size: 1.9rem;
+}
+
+.bar{
+    background-color: #E1544A;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    color: black;
+    margin-top: 2%;
+    padding:0% 2%;
+    align-items: center;
+    gap: 10px;
+    flex-flow: wrap;
+}
+.bar>p{
+    color: black;
+}
+
+.wallet{
+    display: flex;
+    border: 2px solid ;
+    border-image: linear-gradient(45deg, #95342D, #E1544A,#95342D, #E1544A, #95342D) 1;
+    padding: 4%;
+    align-items: center;
+    flex-direction: column;
+    background: url("./img.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.wallet>div>p{
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.wallet>div>p:nth-child(2){
+    color: #95342D;
+}
+
+@media screen and (max-width: 750px) {
+    .info{
+        grid-template-columns: 1fr;
+    }
+    .bar{
+        display: none;
+    }
+}
