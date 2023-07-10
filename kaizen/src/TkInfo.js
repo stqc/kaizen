@@ -4,10 +4,12 @@ import InfoImg from "./Token Information.png";
 import Price from "./price.png";
 
 export var infoUpdater;
-
+export var loading;
 const Info = ()=>{
     const [info,updateInfo] = React.useState({lp:null,mc:null,burn:null,price:null});
+    const [isLoading,udpateLoading] = React.useState(true);
     infoUpdater=updateInfo;
+    loading=udpateLoading;
     return (
         <div className="info">
             <div className="token-info">
@@ -32,7 +34,7 @@ const Info = ()=>{
                         <td>3%</td>
                     </tr>
                     <tr>
-                        <th>Burn:</th>
+                        <th>Tokens Locked:</th>
                         <td>{info.burn} KZN</td>
                     </tr>
                 </table>
@@ -43,7 +45,10 @@ const Info = ()=>{
                     <img src={Price} />
                 </div>
                 <div className="price-val">
-                    <p>$ {info.price}</p>
+                    <p style={{margin:"0"}}>$ {info.price}</p>
+                    <div id="chart" style={{MaxWidth:"100%", height:"200px"}}>
+                            <p style={{display:isLoading?"initial":"none"}}>Generating Chart..</p>
+                    </div>
                 </div>
             </div>
         </div>

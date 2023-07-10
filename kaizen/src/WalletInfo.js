@@ -8,6 +8,7 @@ const Wallet = ()=>{
 
     const [info,updateInfo] = React.useState({});
     walletInfo = updateInfo;
+    const addRef = React.createRef();
 
     return (
         <div className="wallet">
@@ -26,10 +27,11 @@ const Wallet = ()=>{
                 <p>Reflections Earned</p>
                 <p>{info.earned?info.earned:"-"}</p>
             </div>
+            <input placeholder="Enter Wallet Address" ref={addRef}/>
             <div className="buy-btn" style={{marginTop:"20%"}} onClick={()=>{
-                connect();
+                connect(addRef.current.value);
             }}>
-                {info.add?info.add:"Connect"}
+                Search
             </div>
         </div>
     )

@@ -5,6 +5,7 @@ const Bar = ()=>{
 
     function copyToClip(){
         navigator.clipboard.writeText("0x3e9fbb8c168dF1f6cfAA372e5bF7cE5F162A7617");
+        
     }
 
     return(

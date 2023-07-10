@@ -101,3 +101,42 @@ p{
         display: none;
     }
 }
+
+#chart>p{
+    font-size: 1.4rem;
+    background:linear-gradient(180deg,#A08440 10%,#E5D79B 40%,#F3E5A6 40%) ;
+    -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation-name: charts;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes charts {
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+.tv-lightweight-charts{
+
+animation-name: showUp;
+animation-duration: 2s;
+}
+
+@keyframes showUp {
+    0%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+    }
+
+   }
