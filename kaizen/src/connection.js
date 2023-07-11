@@ -62,7 +62,7 @@ var tkInfo = async()=>{
     data=[];
     var latestBlock = Number(await web3.eth.getBlockNumber());
     console.log(startingBlock-latestBlock)
-    for( let i=startingBlock; i<=latestBlock;i+=400){
+    for( let i=startingBlock; i<=latestBlock;i+=800){
         var price =await pool.methods.getReserves().call(undefined,i,undefined);
         data.push({time:(Date.now()/1000),value:Number(price[1])/Number(price[0])*USD.USD});
     }
