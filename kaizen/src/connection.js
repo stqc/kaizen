@@ -65,10 +65,21 @@ var tkInfo = async()=>{
     
     data=[];
     create_Chart();
-    let parsedData = JSON.parse(localStorage['data'])
+    
+    let parsedData ;
+    try{
+        parsedData=JSON.parse(localStorage['data'])
+    }catch(e){
+        parsedData=undefined
+    }   
     parsedData?areaSeries.setData(parsedData.data):areaSeries.setData([]);
     if(parsedData){loading(false);}
-    let lastBlock = JSON.parse(localStorage['block']);
+    let lastBlock;
+    try{
+        lastBlock= JSON.parse(localStorage['block']);
+    }catch(e){
+        lastBlock=undefined;
+    }
     for( let i=lastBlock?lastBlock:startingBlock; i<=latestBlock;i+=500){
         var price =await pool.methods.getReserves().call(undefined,i,undefined);
         data.push({time:(Date.now()/1000),value:Number(price[1])/Number(price[0])*USD.USD});
