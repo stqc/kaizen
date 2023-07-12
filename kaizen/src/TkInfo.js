@@ -45,7 +45,7 @@ const Info = ()=>{
                     <img src={Price} />
                 </div>
                 <div className="price-val">
-                    <p style={{margin:"0"}}>$ {info.price}</p>
+                    <p style={{margin:"0"}}>$ {info.price} <span style={{color:"green", fontWeight:900,fontSize:"1rem",WebkitTextFillColor: "limegreen"}}>{info.change>=0?"+":"-" }{info.change+"%"}</span></p>
                     <div id="chart" style={{MaxWidth:"100%", height:"200px"}}>
                             <p style={{display:isLoading?"initial":"none"}}>Generating Chart..</p>
                     </div>

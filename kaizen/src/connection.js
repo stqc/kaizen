@@ -39,8 +39,12 @@ var tkInfo = async()=>{
          USD =await resp.json();
          EthPerToken*=USD.USD;
     })
+    var latestBlock = Number(await web3.eth.getBlockNumber());
+    var priceAtBlock24hrsAgo = await pool.methods.getReserves().call(undefined,latestBlock-7000,undefined);
+    priceAtBlock24hrsAgo = Number(priceAtBlock24hrsAgo[1])/Number(priceAtBlock24hrsAgo[0])*USD.USD;
+    var priceChange =((EthPerToken-priceAtBlock24hrsAgo)/priceAtBlock24hrsAgo);
     infoUpdater({
-        lp:(lp*USD.USD).toLocaleString(),mc:(mc*USD.USD).toLocaleString(),burn:(burn).toLocaleString(),price:EthPerToken.toLocaleString()
+        lp:(lp*USD.USD*2).toLocaleString(undefined,{maximumFractionDigits:2}),mc:(mc*USD.USD).toLocaleString(undefined,{maximumFractionDigits:2}),burn:(burn).toLocaleString(undefined,{maximumFractionDigits:2}),price:EthPerToken.toLocaleString(),change:priceChange.toLocaleString(undefined,{maximumFractionDigits:2})
     })
     var opVal = await contract.methods.balanceOf('0x76a9f0344e863479fBec931AA4d887D05147cCca').call();
     opVal=web3.utils.toNumber(opVal);
@@ -54,21 +58,45 @@ var tkInfo = async()=>{
     totalFees*=(2/3);
     var refVal = totalFees*EthPerToken;
     taxUpdate({
-        op:opVal.toLocaleString(),
-        ref:totalFees.toLocaleString(),
-        refVal:refVal.toLocaleString()
+        op:opVal.toLocaleString(undefined,{maximumFractionDigits:2}),
+        ref:totalFees.toLocaleString(undefined,{maximumFractionDigits:2}),
+        refVal:refVal.toLocaleString(undefined,{maximumFractionDigits:2})
     })    
     
     data=[];
-    var latestBlock = Number(await web3.eth.getBlockNumber());
-    console.log(startingBlock-latestBlock)
-    for( let i=startingBlock; i<=latestBlock;i+=800){
+    create_Chart();
+    let parsedData = JSON.parse(localStorage['data'])
+    parsedData?areaSeries.setData(parsedData.data):areaSeries.setData([]);
+    if(parsedData){loading(false);}
+    let lastBlock = JSON.parse(localStorage['block']);
+    for( let i=lastBlock?lastBlock:startingBlock; i<=latestBlock;i+=500){
         var price =await pool.methods.getReserves().call(undefined,i,undefined);
         data.push({time:(Date.now()/1000),value:Number(price[1])/Number(price[0])*USD.USD});
     }
-    create_Chart();
-    areaSeries.setData(data);
+    localStorage['block']=latestBlock;
+    // parsedData=parsedData?parsedData.data.concat(data):data;
+    
+    if(parsedData){ // caching the data for faster loads on refresh of the page
+        let new_data=[parsedData.data[parsedData.data.length-1]]
+        let last_index=0;
+        for(let i =0; i < data.length; i++){
+            if(new_data[last_index].value!==data[i].value){
+                
+                new_data.push(data[i])
+                last_index++;
+            }
+        }
+        new_data.splice(0,1);
+        parsedData=parsedData.data.concat(new_data)
+    }else{
+        parsedData=data
+    }
+
+    localStorage['data'] = JSON.stringify({'data':parsedData}) //parsedData
+    
+    areaSeries.setData(parsedData);
     loading(false);
+    console.log("chart updated");
     
 }
 

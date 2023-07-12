@@ -5,6 +5,7 @@ import Globe from "./globe.png";
 import Twitter from "./twtter.png";
 import Tele from "./tele.png";
 import Med from "./med.png";
+import ETH from "./etherscan-logo-circle-light.png";
 
 const Side = ()=>{
     return(
@@ -47,6 +48,14 @@ const Side = ()=>{
                 <img src={Med} alt="logo"/>
             </div>
         </div>
+        <div className="icon" onClick={()=>{
+            window.open("https://etherscan.io/address/0x3e9fbb8c168df1f6cfaa372e5bf7ce5f162a7617");
+        }}>
+            <div>
+                <img src={ETH} alt="logo"/>
+            </div>
+        </div>
+
     </div>);
 }
 
