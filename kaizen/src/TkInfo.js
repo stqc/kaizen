@@ -31,8 +31,8 @@ const Info = ()=>{
                             <td> {(100000000).toLocaleString()} KZN</td>
                         </tr>
                         <tr>
-                            <th>Tax:</th>
-                            <td> 3%</td>
+                            <th>Buy Tax/Sell Tax:</th>
+                            <td> {info.buyTax}%/{info.sellTax}%</td>
                         </tr>
                         <tr>
                             <th>Tokens Locked:</th>

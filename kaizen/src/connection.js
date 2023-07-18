@@ -45,9 +45,7 @@ var tkInfo = async()=>{
     var priceAtBlock24hrsAgo = await pool.methods.getReserves().call(undefined,latestBlock-7000,undefined);
     priceAtBlock24hrsAgo = Number(priceAtBlock24hrsAgo[1])/Number(priceAtBlock24hrsAgo[0])*USD.USD;
     var priceChange =((EthPerToken-priceAtBlock24hrsAgo)/priceAtBlock24hrsAgo);
-    infoUpdater({
-        lp:(lp*USD.USD*2).toLocaleString(undefined,{maximumFractionDigits:2}),mc:(mc*USD.USD).toLocaleString(undefined,{maximumFractionDigits:2}),burn:(burn).toLocaleString(undefined,{maximumFractionDigits:2}),price:EthPerToken.toLocaleString(),change:priceChange.toLocaleString(undefined,{maximumFractionDigits:2})
-    })
+
     var opVal = await contract.methods.balanceOf('0x76a9f0344e863479fBec931AA4d887D05147cCca').call();
     opVal=web3.utils.toNumber(opVal);
     opVal = (Number(opVal)/1e18)*EthPerToken;
@@ -59,10 +57,18 @@ var tkInfo = async()=>{
     totalFees = Number(totalFees)/1e18;
     totalFees*=(2/3);
     var refVal = totalFees*EthPerToken;
+    var totalSellTax = Number(await contract.methods._sellOperationsFee().call() + await contract.methods._sellTaxFee().call())/100;
+    var totalBuyTax = Number(await contract.methods._buyOperationsFee().call() + await contract.methods._buyTaxFee().call())/100;
+    infoUpdater({
+        lp:(lp*USD.USD*2).toLocaleString(undefined,{maximumFractionDigits:2}),mc:(mc*USD.USD).toLocaleString(undefined,{maximumFractionDigits:2}),burn:(burn).toLocaleString(undefined,{maximumFractionDigits:2}),price:EthPerToken.toLocaleString(),change:priceChange.toLocaleString(undefined,{maximumFractionDigits:2}),
+        buyTax:totalBuyTax,
+        sellTax:totalSellTax
+    })
     taxUpdate({
         op:opVal.toLocaleString(undefined,{maximumFractionDigits:2}),
         ref:totalFees.toLocaleString(undefined,{maximumFractionDigits:2}),
-        refVal:refVal.toLocaleString(undefined,{maximumFractionDigits:2})
+        refVal:refVal.toLocaleString(undefined,{maximumFractionDigits:2}),
+
     })    
     
     data=[];
