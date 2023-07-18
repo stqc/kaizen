@@ -21,8 +21,10 @@ var data=[];
 var chart;
 var areaSeries;
 
+const pool = new web3.eth.Contract(poolABI,'0x2E953FA2A6dB7b958C841bf9d1C50E0ec8166eaA');
+
 var tkInfo = async()=>{
-    const pool = new web3.eth.Contract(poolABI,'0x2E953FA2A6dB7b958C841bf9d1C50E0ec8166eaA');
+    
     var lp=await weth.methods.balanceOf('0x2E953FA2A6dB7b958C841bf9d1C50E0ec8166eaA').call();
     lp=web3.utils.toNumber(lp);
     lp= (Number(lp)/1e18).toLocaleString();
@@ -178,3 +180,4 @@ const create_Chart=()=>{
     chart.applyOptions(darkTheme.chart);
     areaSeries.applyOptions(darkTheme.series);
 }
+

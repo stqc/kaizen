@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-left: 100px;
-    padding: 2% 4%;
+    padding: 2% 4% 20px ;
     align-items: center;
 }
 
@@ -13,20 +13,31 @@
     border: 1px solid #E1544A;
     background: linear-gradient(90deg,#95342D,#E1544A,#95342D);
     color: white;
-    padding: 1% 5%;
     font-family: 'Inter' sans-serif;
     font-weight: 800;
     font-size: 1.4rem;
+    height: 45px;
+    width: 190px;
+    text-align: center;
 }
 
+@media screen and (max-width:750px) {
+    .nav{
+        margin:2%;
+        flex-direction: column;
+    }
+    #b{
+        display: none;
+    }
+    .image-logo{
+        margin-top: 4%;
+    }
+}
 @media screen and (max-width:490px) {
     .nav{
-        flex-direction: column;
         padding: 4% 2%;
     }
-    .buy-btn{
-        margin-top: 5%;
-    }
+
 
 
 }

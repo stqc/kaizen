@@ -8,7 +8,7 @@ const Tax = ()=>{
     const [info,updateInfo] = React.useState({op:null,ref:null,refVal:null});
     taxUpdate=updateInfo;
     return (
-        <div className="info" style={{marginTop:"2%"}}>
+        <div className="info" style={{marginTop:"20px"}}>
            <div className="temple">
                 <div>
                     <img src={Templle}  style={{width:"100%"}}/>
@@ -25,7 +25,7 @@ const Tax = ()=>{
                 <div style={{margin:"2%"}}>
                     <p>Reflections Value:</p>
                     <p className="p-val">$ {info.refVal}</p>
-                    <p>Reflections To Date:</p>
+                    <p style={{marginTop:"20%"}}>Reflections To Date:</p>
                     <p className="p-val">{info.ref} KZN</p>
                 </div>
            </div>

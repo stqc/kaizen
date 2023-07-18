@@ -13,32 +13,33 @@ const Info = ()=>{
     return (
         <div className="info">
             <div className="token-info">
-                <div>
-                    <img src={InfoImg}/>
+                <div style={{height:"100%"}}>
+                    <div>
+                        <img src={InfoImg}/>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Total Liquidity:</th>
+                            <td> ${info.lp}</td>
+                        </tr>
+                        <tr>
+                            <th>Market Cap:</th>
+                            <td> ${info.mc}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Supply:</th>
+                            <td> {(100000000).toLocaleString()} KZN</td>
+                        </tr>
+                        <tr>
+                            <th>Tax:</th>
+                            <td> 3%</td>
+                        </tr>
+                        <tr>
+                            <th>Tokens Locked:</th>
+                            <td> {info.burn} KZN</td>
+                        </tr>
+                    </table>
                 </div>
-                <table>
-                    <tr>
-                        <th>Total Liquidity:</th>
-                        <td>$ {info.lp}</td>
-                    </tr>
-                    <tr>
-                        <th>Market Cap:</th>
-                        <td>$ {info.mc}</td>
-                    </tr>
-                    <tr>
-                        <th>Total Supply:</th>
-                        <td>{(100000000).toLocaleString()} KZN</td>
-                    </tr>
-                    <tr>
-                        <th>Tax:</th>
-                        <td>3%</td>
-                    </tr>
-                    <tr>
-                        <th>Tokens Locked:</th>
-                        <td>{info.burn} KZN</td>
-                    </tr>
-                </table>
-
             </div>
             <div className="price">
                 <div>
